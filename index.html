@@ -255,8 +255,6 @@ input[type="file"], select, input[type="text"] {
         max-width: 100%;
     }
 }
-
-        }
     </style>
 </head>
 <body>
@@ -317,6 +315,13 @@ input[type="file"], select, input[type="text"] {
                 <h5>7. Item mais Recente:</h5>
                 <div id="editMenu"></div>
                 <button class="button" onclick="openMenuEditor()" title="Mostra o item mais recente">Mostrar</button>
+            </div>
+
+            <div class="step">
+                <h5>8. Gerenciar Estado:</h5>
+                <button class="button" onclick="saveState()" title="Salva o estado atual da lista de arquivos">Salvar Estado</button>
+                <button class="button" onclick="loadState()" title="Carrega o último estado salvo da lista de arquivos">Carregar Estado</button>
+                <button class="button" onclick="clearState()" title="Limpa o estado salvo e a lista de arquivos">Limpar Estado</button>
             </div>
         </div>
     </div>
@@ -454,6 +459,7 @@ input[type="file"], select, input[type="text"] {
                         dropdown.add(option);
 
                         showNotification(`Arquivo ${file.name} carregado com sucesso!`);
+                        saveState(); // Salva o estado após cada arquivo carregado
                     } catch (error) {
                         console.error("Erro ao carregar o arquivo JSON:", error);
                         showNotification(`Erro ao carregar ${file.name}: ${error.message}`, 'error');
@@ -555,10 +561,58 @@ input[type="file"], select, input[type="text"] {
             document.getElementById('overlay').style.display = 'block';
         }
 
+        function saveState() {
+            const state = {
+                fileList: Array.from(document.getElementById('fileDropdown').options).map(option => ({
+                    name: option.text,
+                    content: fileMap.get(option.value)
+                })),
+                selectedFile: document.getElementById('fileDropdown').value
+            };
+            localStorage.setItem('MAEMenuEditorState', JSON.stringify(state));
+            showNotification('Estado salvo com sucesso!');
+        }
+
+        function loadState() {
+            const savedState = localStorage.getItem('MAEMenuEditorState');
+            if (savedState) {
+                const state = JSON.parse(savedState);
+                const dropdown = document.getElementById('fileDropdown');
+                dropdown.innerHTML = '<option value="">Selecione um arquivo</option>';
+                fileMap.clear();
+                
+                state.fileList.forEach(file => {
+                    const option = document.createElement('option');
+                    option.value = file.name;
+                    option.text = file.name;
+                    dropdown.add(option);
+                    fileMap.set(file.name, file.content);
+                });
+                
+                if (state.selectedFile) {
+                    dropdown.value = state.selectedFile;
+                    loadSelectedFile();
+                }
+                showNotification('Estado carregado com sucesso!');
+            } else {
+                showNotification('Nenhum estado salvo encontrado.', 'error');
+            }
+        }
+
+        function clearState() {
+            if (confirm('Tem certeza que deseja limpar o estado salvo? Isso removerá todos os arquivos da lista.')) {
+                localStorage.removeItem('MAEMenuEditorState');
+                document.getElementById('fileDropdown').innerHTML = '<option value="">Selecione um arquivo</option>';
+                fileMap.clear();
+                showNotification('Estado limpo com sucesso!');
+            }
+        }
+
         // Inicialização
         document.addEventListener('DOMContentLoaded', function() {
             updateButtonLabel();
             updateCourseList();
+            loadState(); // Carrega o estado salvo ao iniciar a página
         });
 
         document.querySelectorAll('.button, #fileDropdown').forEach(element => {
