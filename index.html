@@ -168,11 +168,11 @@
 
         .notification {
             position: fixed;
-            top: 20px;
-            right: 20px;
-            padding: 15px;
+            top: 30px;
+            right: 1px;
+            padding: 5px;
             border-radius: 4px;
-            color: white;
+            color: darkgreen;
             font-weight: bold;
             z-index: 1002;
         }
@@ -184,25 +184,26 @@
         .notification.error {
             background-color: #dc3545;
         }
+#menuToggle {
+    display: none;
+    position: absolute;
+    top: 50px;
+    right: 5px; /* Alterado de 'left: 10px' para 'right: 10px' */
+    z-index: 1001;
+    background-color: gray;
+opacity: 0.2;
+    color: white;
+    border: 3px;
+	border-color: darkgray;
+    padding: 10px;
+    border-radius: 5px;
+}
 
-        #menuToggle {
-            display: none;
-            position: fixed;
-            top: 10px;
-            left: 10px;
-            z-index: 1001;
-            background-color: #385764;
-            color: white;
-            border: none;
-            padding: 10px;
-            border-radius: 5px;
-        }
-
-        @media (max-width: 768px) {
+        @media (max-width: 700px) {
             .sidebar {
-                width: 80%;
+                width: 86%;
                 max-width: 300px;
-                left: -80%;
+                left: -84%;
             }
 
             .sidebar.visible {
