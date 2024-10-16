@@ -243,6 +243,32 @@ opacity: 0.2;
             #menuToggle {
                 display: block;
             }
+
+
+body {
+    transition: margin-left 0.3s ease;
+}
+
+body.sidebar-open {
+    margin-left: 300px; /* Ajuste este valor para a largura do seu sidebar */
+}
+
+.content {
+    transition: margin-left 0.3s ease;
+}
+
+@media (max-width: 768px) {
+    body.sidebar-open {
+        margin-left: 0;
+    }
+
+    body.sidebar-open .content {
+        opacity: 0.7;
+        pointer-events: none;
+    }
+}
+
+
         }
     </style>
 </head>
