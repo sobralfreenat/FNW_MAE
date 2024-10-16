@@ -187,7 +187,7 @@
 #menuToggle {
     display: none;
     position: absolute;
-    top: 50px;
+    top: 3px;
     right: 5px; /* Alterado de 'left: 10px' para 'right: 10px' */
     z-index: 1001;
     background-color: gray;
@@ -198,11 +198,34 @@ opacity: 0.2;
     padding: 10px;
     border-radius: 5px;
 }
-@media (max-width: 768px) {
+/* Estilo padrão do sidebar */
+.sidebar {
+    width: 350px;
+    left: -0px;
+    /* outras propriedades... */
+}
+
+/* Controle de exibição do botão de toggle */
+@media (max-width: 4200px) {
+    #menuToggle {
+        display: block;
+    }
+}
+
+/* Ajuste do sidebar para telas médias */
+@media (max-width: 362px) {
     .sidebar {
-        width: 100%;
-        max-width: none;
-        left: -100%;
+        width: 70%;
+        max-width: 350px;
+        left: -83%;
+    }
+}
+
+/* Ajuste do sidebar para telas pequenas */
+@media (max-width: 576px) {
+    .sidebar {
+        width: 85%;
+        max-width: 100%;
             }
 
             .sidebar.visible {
@@ -226,7 +249,9 @@ opacity: 0.2;
 <body>
     <button id="menuToggle" onclick="toggleSidebar()">☰ Menu</button>
     <div class="container">
+
         <div class="sidebar" id="sidebar">
+<br>
             <img src="https://d1yei2z3i6k35z.cloudfront.net/3119789/666e1df34d7ed_BannerFNWAssessoriaDigitalprovisorio.png" alt="Banner" style="width: 80%; height: auto; display: block; margin: 0 auto;" loading="lazy">
             <h6 id="sidebar-title">Arquivo Selecionado</h6>
             <div class="search-bar">
