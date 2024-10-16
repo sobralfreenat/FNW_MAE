@@ -16,19 +16,23 @@
 
         .container {
             display: flex;
-            flex-direction: column;
         }
 
         .sidebar {
-            width: 100%;
+            width: 300px;
             background-color: #19262b;
             color: white;
             overflow-y: auto;
             transition: transform 0.3s ease;
+            position: fixed;
+            height: 100%;
+            left: -300px;
+            top: 0;
+            z-index: 1000;
         }
 
-        .sidebar.hidden {
-            display: none;
+        .sidebar.visible {
+            transform: translateX(300px);
         }
 
         .sidebar h2 {
@@ -91,6 +95,7 @@
             flex-grow: 1;
             padding: 20px;
             transition: margin-left 0.3s;
+            width: 100%;
         }
 
         .step {
@@ -180,64 +185,46 @@
             background-color: #dc3545;
         }
 
-        @media (min-width: 768px) {
-            .container {
-                flex-direction: row;
-            }
-
-            .sidebar {
-                width: 300px;
-                position: fixed;
-                height: 100%;
-                left: 0;
-                top: 0;
-            }
-
-            .content {
-                margin-left: 300px;
-            }
-
-            .sidebar.hidden + .content {
-                margin-left: 0;
-            }
+        #menuToggle {
+            display: none;
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            z-index: 1001;
+            background-color: #385764;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
         }
 
-        @media (max-width: 767px) {
+        @media (max-width: 768px) {
             .sidebar {
-                position: fixed;
-                top: 0;
-                left: 0;
-                right: 0;
-                bottom: 0;
-                z-index: 1000;
-                transform: translateX(-100%);
+                width: 80%;
+                max-width: 300px;
+                left: -80%;
             }
 
-            .sidebar.hidden {
-                transform: translateX(0);
+            .sidebar.visible {
+                transform: translateX(100%);
             }
 
             .content {
-                margin-left: 0;
-            }
-
-            .step {
                 padding: 15px;
             }
 
             .button {
                 width: 100%;
             }
+
+            #menuToggle {
+                display: block;
+            }
         }
     </style>
 </head>
-
 <body>
-
-
-    <img src="https://d1yei2z3i6k35z.cloudfront.net/3119789/66468353e4e6d_FNWfreenatstoreLogodownload.jpg" alt="Descrição da Imagem" style="height: 30px; vertical-align: middle; margin-right: 10px;">
-
-
+    <button id="menuToggle" onclick="toggleSidebar()">☰ Menu</button>
     <div class="container">
         <div class="sidebar" id="sidebar">
             <img src="https://d1yei2z3i6k35z.cloudfront.net/3119789/666e1df34d7ed_BannerFNWAssessoriaDigitalprovisorio.png" alt="Banner" style="width: 80%; height: auto; display: block; margin: 0 auto;" loading="lazy">
@@ -249,7 +236,7 @@
         </div>
 
         <div class="content" id="content">
-            
+            <h1>.</h1>
             
             <div class="step">
                 <h5>1. Escolher e Carregar Arquivo</h5>
@@ -352,13 +339,12 @@
 
         function toggleSidebar() {
             const sidebar = document.getElementById('sidebar');
-            sidebar.classList.toggle('hidden');
-            const content = document.getElementById('content');
-            
-            if (window.innerWidth >= 768) {
-                content.style.marginLeft = sidebar.classList.contains('hidden') ? '0' : '300px';
+            sidebar.classList.toggle('visible');
+            const menuToggle = document.getElementById('menuToggle');
+            if (sidebar.classList.contains('visible')) {
+                menuToggle.textContent = '✕ Fechar';
             } else {
-                content.style.marginLeft = '0';
+                menuToggle.textContent = '☰ Menu';
             }
         }
 
