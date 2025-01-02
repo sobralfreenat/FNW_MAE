@@ -3,336 +3,335 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>M.A.E. Menu Decoder</title>
+    <title>M.A.E. Menu Decoder 3.0</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&amp;display=swap" rel="stylesheet">
     <style>
-       body {
-    font-family: 'Roboto', sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f0f4f8;
-    color: #333;
-    transition: margin-left 0.3s ease;
-}
+        :root {
+            --primary-color: #172524; /* Cor primária padrão */
+            --secondary-color: #34495e; /* Cor secundária padrão */
+        }
 
-.container {
-    display: flex;
-    max-width: 1000px; /* Ajuste a largura total do container */
-    margin: 0 auto; /* Centraliza o container */
-    
-}
-.sidebar {
-    width: 300px;
-    background-color: #172524;
-    color: white;
-    overflow-y: auto;
-    transition: transform 0.3s ease;
-    position: fixed;
-    height: 100%;
-    left: -300px;
-    top: 0;
-    z-index: 1000;
-}
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f4f8;
+            color: #333;
+            transition: margin-left 0.3s ease;
+        }
 
-.sidebar.visible {
-    transform: translateX(300px);
-}
+        .container {
+            display: flex;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
 
-.sidebar h2 {
-    text-align: left;
-    color: #ecf0f1;
-    margin: 20px 0;
-}
+        .sidebar {
+            width: 300px;
+            background-color: var(--primary-color);
+            color: white;
+            overflow-y: auto;
+            transition: transform 0.3s ease;
+            position: fixed;
+            height: 100%;
+            left: -300px;
+            top: 0;
+            z-index: 1000;
+        }
 
-.search-bar {
-    padding: 10px;
-    background-color: #34495e;
-}
+        .sidebar.visible {
+            transform: translateX(300px);
+        }
 
-.search-bar input {
-    width: 100%;
-    padding: 8px;
-    border: none;
-    border-radius: 4px;
-    color: #333;
-}
+        .sidebar h2 {
+            text-align: left;
+            color: #ecf0f1;
+            margin: 20px 0;
+        }
 
-.category {
-    padding: 10px;
-    cursor: pointer;
-    background-color: #34495e;
-    margin-bottom: 5px;
-    text-align: left;
-}
+        .search-bar {
+            padding: 10px;
+            background-color: var(--secondary-color);
+        }
 
-.category:hover {
-    background-color: #3b5998;
-}
+        .search-bar input {
+            width: 100%;
+            padding: 8px;
+            border: none;
+            border-radius: 4px;
+            color: #333;
+        }
 
-.course-list {
-    display: none;
-    padding-left: 20px;
-    max-height: 150px;
-    overflow-y: auto;
-}
+        .category {
+            padding: 10px;
+            cursor: pointer;
+            background-color: var(--secondary-color);
+            margin-bottom: 5px;
+            text-align: left;
+        }
 
-.course {
-    padding: 8px;
-    cursor: pointer;
-    background-color: #455a64;
-    text-align: left;
-    color: #ecf0f1;
-    margin-bottom: 2px;
-    border-radius: 4px;
-}
+        .category:hover {
+            background-color: #3b5998;
+        }
 
-.course:hover {
-    background-color: #3b5998;
-}
+        .course-list {
+            display: none;
+            padding-left: 20px;
+            max-height: 150px;
+            overflow-y: auto;
+        }
 
-.course.selected {
-    background-color: #2c3e50;
-}
+        .course {
+            padding: 8px;
+            cursor: pointer;
+            background-color: #455a64;
+            text-align: left;
+            color: #ecf0f1;
+            margin-bottom: 2px;
+            border-radius: 4px;
+        }
 
-.content {
-    flex-grow: 1;
-    padding: 20px;
-    transition: margin-left 0.3s;
-    width: 100%;
-}
+        .course:hover {
+            background-color: #3b5998;
+        }
 
-.step {
-    background-color: white;
-    border-radius: 8px;
-    padding: 20px;
-    margin-bottom: 20px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-}
+        .course.selected {
+            background-color: #2c3e50;
+        }
 
-.button {
-    background-color: #385764;
-    color: white;
-    border: none;
-    padding: 10px 15px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    width: auto;
-    margin-bottom: 10px;
-    text-align: center;
-    display: inline-block;
-}
+        .content {
+            flex-grow: 1;
+            padding: 20px;
+            transition: margin-left 0.3s;
+            width: 100%;
+        }
 
-.button:hover {
-    background-color: #2c3e50;
-}
+        .step {
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
 
-input[type="file"], select, input[type="text"] {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-}
+        .button {
+            background-color: #385764;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            width: auto;
+            margin-bottom: 10px;
+            text-align: center;
+            display: inline-block;
+        }
 
-#overlay {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 1000;
-}
+        .button:hover {
+            background-color: #2c3e50;
+        }
 
-#popup {
-    display: none;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: white;
-    width: 90%;
-    max-width: 400px;
-    padding: 20px;
-    z-index: 1001;
-    border-radius: 10px;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.7);
-    text-align: left;
-}
+        input[type="file"], select, input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
 
-.close-popup {
-    text-align: right;
-    cursor: pointer;
-    color: red;
-    font-weight: bold;
-}
+        #overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+        }
 
-.notification {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    padding: 15px;
-    border-radius: 4px;
-    color: white;
-    font-weight: bold;
-    z-index: 1002;
-}
+        #popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            width: 90%;
+            max-width: 400px;
+            padding: 20px;
+            z-index: 1001;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.7);
+            text-align: left;
+        }
 
-.notification.success {
-    background-color: #28a745;
-}
+        .close-popup {
+            text-align: right;
+            cursor: pointer;
+            color: red;
+            font-weight: bold;
+        }
 
-.notification.error {
-    background-color: #dc3545;
-}
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px;
+            border-radius: 4px;
+            color: white;
+            font-weight: bold;
+            z-index: 1002;
+        }
 
-#menuToggle {
-    display: none;
-    position: fixed;
-    top: 130px;
-    right: 10px;
-    z-index: 1001;
-    background-color: #385764;
-	opacity: 0.4;
-    color: white;
-    border: none;
-    padding: 10px;
-    border-radius: 5px;
-}
+        .notification.success {
+            background-color: #28a745;
+        }
 
-@media (max-width: 1200px) {
-    #menuToggle {
-        display: block;
-    }
-}
+        .notification.error {
+            background-color: #dc3545;
+        }
 
-@media (max-width: 992px) {
-    .sidebar {
-        width: 80%;
-        max-width: 350px;
-        left: -90%;
-    }
+        #menuToggle {
+            display: none;
+            position: fixed;
+            top: 130px;
+            right: 10px;
+            z-index: 1001;
+            background-color: #385764;
+            opacity: 0.4;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+        }
 
-    .sidebar.visible {
-        transform: translateX(100%);
-    }
+        @media (max-width: 1200px) {
+            #menuToggle {
+                display: block;
+            }
+        }
 
-    body.sidebar-open {
-        margin-left: 0;
-    }
+        @media (max-width: 992px) {
+            .sidebar {
+                width: 80%;
+                max-width: 350px;
+                left: -90%;
+            }
 
-    body.sidebar-open .content {
-        opacity: 0.7;
-        pointer-events: none;
-    }
-}
+            .sidebar.visible {
+                transform: translateX(100%);
+            }
 
-@media (max-width: 768px) {
-    .content {
-        padding: 15px;
-        padding-top: 50px;
-    }
+            body.sidebar-open {
+                margin-left: 0;
+            }
 
-    .button {
-        width: 100%;
-    }
+            body.sidebar-open .content {
+                opacity: 0.7;
+                pointer-events: none;
+            }
+        }
 
-    body.sidebar-open::after {
-        content: '';
-        position: fixed;
-        top: 0;
-        left: -10;
-        right: 0;
-        bottom: 0;
-        background: rgba(0, 0, 0, 0.5);
-        z-index: 999;
-    }
-}
+        @media (max-width: 768px) {
+            .content {
+                padding: 15px;
+                padding-top: 50px;
+            }
 
-@media (max-width: 576px) {
-    .sidebar {
-        width: 90%;
-        max-width: 100%;
-    }
-}
+            .button {
+                width: 100%;
+            }
+
+            body.sidebar-open::after {
+                content: '';
+                position: fixed;
+                top: 0;
+                left: -10;
+                right: 0;
+                bottom: 0;
+                background: rgba(0, 0, 0, 0.5);
+                z-index: 999;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .sidebar {
+                width: 90%;
+                max-width: 100%;
+            }
+        }
+
+        /* Estilos para personalização */
+        .settings-panel {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        #logoPreview {
+            display: none;
+            width: 100px;
+            height: auto;
+        }
     </style>
 </head>
 <body>
     <button id="menuToggle" onclick="toggleSidebar()">☰ Menu</button>
     <div class="container">
-
         <div class="sidebar" id="sidebar">
-<br>
-            <img src="https://d1yei2z3i6k35z.cloudfront.net/3119789/666e1df34d7ed_BannerFNWAssessoriaDigitalprovisorio.png" alt="Banner" style="width: 80%; height: auto; display: block; margin: 0 auto;" loading="lazy">
+            <br>
+            <img id="logo" src="https://d1yei2z3i6k35z.cloudfront.net/3119789/666e1df34d7ed_BannerFNWAssessoriaDigitalprovisorio.png" alt="Banner" style="width: 80%; height: auto; display: block; margin: 0 auto;" loading="lazy">
             <h6 id="sidebar-title">Arquivo Selecionado</h6>
             <div class="search-bar">
-                <input type="text" id="search" placeholder="Buscar assunto..." oninput="filterCourses()">
+                <input type="text" id="search" placeholder="M.A.E. 3.0  - Buscar assunto..." oninput="filterCourses()">
             </div>
             <div id="course-menu"></div>
         </div>
 
-
-
- 
-
         <div class="content" id="content">
+            <img src="https://d1yei2z3i6k35z.cloudfront.net/3119789/666e1df34d7ed_BannerFNWAssessoriaDigitalprovisorio.png" alt="Banner" style="width: 80%; height: auto; display: block; margin: 0 auto;" loading="lazy">
+            <br>
+            <h6>FNW Assessoria Digital +5511911595028 - Alex Sobral</h6>
 
-
-<img src="https://d1yei2z3i6k35z.cloudfront.net/3119789/666e1df34d7ed_BannerFNWAssessoriaDigitalprovisorio.png" alt="Banner" style="width: 80%; height: auto; display: block; margin: 0 auto;" loading="lazy">
-
-<br>
-
-
-            <h6>FNW Assessoria Digital   +5511911595028 - Alex Sobral</h6>
-
-
-
-
-
-
-            
             <div class="step">
                 <h5>1. Escolher e Carregar Arquivo</h5>
                 <input type="file" id="fileInput" accept=".json" multiple="" title="Selecione os arquivos JSON para carregar">
                 <button class="button" onclick="loadFiles()" title="Clique para carregar os arquivos selecionados">Carregar Arquivos</button>
             </div>
 
-
-            
             <div class="step">
                 <h5>2. Selecionar Arquivo na lista</h5>
                 <select id="fileDropdown" title="Escolha um arquivo carregado para exibir">
                     <option value="">Selecione um arquivo</option>
                 </select>
             </div>
-            
+
             <div class="step">
                 <h5>3. Carregar da Lista</h5>
                 <button class="button" onclick="loadSelectedFile()" title="Carrega o arquivo selecionado no menu">Carregar da Lista</button>
             </div>
-            
+
             <div class="step">
                 <h5>4. Mostrar Menu</h5>
                 <button class="button toggle-button" id="toggleButton" onclick="toggleSidebar()" title="Mostra ou oculta o menu lateral">On/Off</button>
             </div>
-            
-            <h4></h4>
-            
+
             <div class="step">
                 <h5>5. Nomear e Salvar Arquivo:</h5>
                 <input type="text" id="filename-input" placeholder="Digite o nome do arquivo" title="Digite o nome para o arquivo de menu">
                 <button class="button" onclick="saveCoursesToFile()" title="Salva o menu atual em um arquivo JSON">Salvar</button>
             </div>
-            
+
             <div class="step">
                 <h5>6. Limpar Menu Sem apagar lista</h5>
                 <button class="button" onclick="clearMenu()" title="Remove todos os itens do menu sem apagar a lista de arquivos">Limpar Menu</button>
             </div>
-            
-            <br><br><br><br>
-             <div class="step">
+
+            <div class="step">
                 <h5>7. Item mais Recente:</h5>
                 <div id="editMenu"></div>
                 <button class="button" onclick="openMenuEditor()" title="Mostra o item mais recente">Mostrar</button>
@@ -343,6 +342,23 @@ input[type="file"], select, input[type="text"] {
                 <button class="button" onclick="saveState()" title="Salva o estado atual da lista de arquivos">Salvar Estado</button>
                 <button class="button" onclick="loadState()" title="Carrega o último estado salvo da lista de arquivos">Carregar Estado</button>
                 <button class="button" onclick="clearState()" title="Limpa o estado salvo e a lista de arquivos">Limpar Estado</button>
+            </div>
+
+            <div class="settings-panel">
+                <h3>Configurações de Personalização</h3>
+                <div>
+                    <label for="primaryColor">Cor Primária:</label>
+                    <input type="color" id="primaryColor" onchange="updatePrimaryColor()">
+                </div>
+                <div>
+                    <label for="secondaryColor">Cor Secundária:</label>
+                    <input type="color" id="secondaryColor" onchange="updateSecondaryColor()">
+                </div>
+                <div>
+                    <label for="logoUpload">Carregar Logotipo:</label>
+                    <input type="file" id="logoUpload" accept="image/*" onchange="updateLogo()">
+                    <img id="logoPreview" style="display:none;">
+                </div>
             </div>
         </div>
     </div>
@@ -501,7 +517,7 @@ input[type="file"], select, input[type="text"] {
                 for (const key in data) {
                     courses[key] = data[key];
                 }
-                updateCourseList();
+                                updateCourseList();
                 document.getElementById('sidebar-title').innerText = ` - ✓  ${selectedFile}`;
                 showNotification(`Menu carregado de ${selectedFile}`);
             } else {
@@ -627,6 +643,33 @@ input[type="file"], select, input[type="text"] {
                 fileMap.clear();
                 showNotification('Estado limpo com sucesso!');
             }
+        }
+
+        // Funções de personalização
+        function updatePrimaryColor() {
+            const color = document.getElementById('primaryColor').value;
+            document.documentElement.style.setProperty('--primary-color', color);
+            showNotification('Cor primária atualizada!');
+        }
+
+        function updateSecondaryColor() {
+            const color = document.getElementById('secondaryColor').value;
+            document.documentElement.style.setProperty('--secondary-color', color);
+            showNotification('Cor secundária atualizada!');
+        }
+
+        function updateLogo() {
+            const input = document.getElementById('logoUpload');
+            const file = input.files[0];
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const logo = document.getElementById('logo');
+                logo.src = e.target.result;
+                document.getElementById('logoPreview').src = e.target.result;
+                document.getElementById('logoPreview').style.display = 'block';
+                showNotification('Logotipo atualizado com sucesso!');
+            };
+            reader.readAsDataURL(file);
         }
 
         // Inicialização
